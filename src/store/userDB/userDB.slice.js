@@ -33,6 +33,6 @@ const userDBSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addUser } = userDBSlice.actions;
+export const { addUser, updateUserToDoList } = userDBSlice.actions;
 
 export default userDBSlice.reducer;

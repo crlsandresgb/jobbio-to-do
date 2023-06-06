@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../../store/auth/auth.slice";
+import { populateUserLists } from "../../store/todo/todo.slice";
 import {
     INITIAL_VALUES_SIGN_IN,
     VALIDATION_SCHEMES_SIGN_IN,
@@ -19,6 +20,8 @@ const SignIn = ({ onClose }) => {
         );
         // Log In User
         dispatch(logIn(findUser));
+        // Get all lists from DB
+        dispatch(populateUserLists(findUser.toDoList));
         // Close Modal
         onClose();
     };

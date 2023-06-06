@@ -65,6 +65,12 @@ const todoSlice = createSlice({
             const todo = list.toDoList.find((todo) => todo.id === todoId);
             todo.task = task;
         },
+        removeAllLists: () => {
+            return [];
+        },
+        populateUserLists: (state, action) => {
+            return [...state, ...action.payload];
+        },
     },
 });
 
@@ -77,6 +83,8 @@ export const {
     changeTodoStatus,
     changeEditStatus,
     changeTodoName,
+    removeAllLists,
+    populateUserLists,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;
