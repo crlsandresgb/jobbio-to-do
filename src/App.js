@@ -1,7 +1,15 @@
-import { Box, Button, Container, Stack, ThemeProvider } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import {
+    Box,
+    Container,
+    IconButton,
+    ThemeProvider,
+    Tooltip,
+} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import { buttonSX, floatingButtonSX } from "./assets/appStyles";
 import "./assets/main.css";
 import { theme } from "./assets/theme";
 import Header from "./components/header/Header";
@@ -38,21 +46,14 @@ function App() {
         <Box>
             <ThemeProvider theme={theme}>
                 <Header openSignUp={openSignUp} openSignIn={openSignIn} />
+                <Box sx={floatingButtonSX}>
+                    <Tooltip title="Add List">
+                        <IconButton onClick={handleAddList} sx={buttonSX}>
+                            <AddCircleIcon fontSize="large" color="primary" />
+                        </IconButton>
+                    </Tooltip>
+                </Box>
                 <Container maxWidth="md">
-                    <Stack
-                        my={3}
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleAddList}
-                        >
-                            Add List
-                        </Button>
-                    </Stack>
                     <Grid container spacing={2}>
                         {toDoLists.map((list) => {
                             return <ToDo list={list} key={list.id} />;

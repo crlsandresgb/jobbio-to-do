@@ -9,6 +9,7 @@ import {
     Divider,
     Stack,
     TextField,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -80,7 +81,7 @@ const ToDo = ({ list }) => {
         dispatch(changeEditStatus(changeEditPayload));
     };
     return (
-        <Grid xs={6}>
+        <Grid xs={12} md={6}>
             <Item>
                 <Box my={3} mx={2}>
                     {list.toDoList.map((item) => {
@@ -122,39 +123,45 @@ const ToDo = ({ list }) => {
                                 >
                                     {item.editing ? (
                                         <>
-                                            {" "}
-                                            <SaveIcon
-                                                sx={{ cursor: "pointer" }}
-                                                onClick={handleChangeToDoName.bind(
-                                                    null,
-                                                    item.id
-                                                )}
-                                            />
-                                            <CancelIcon
+                                            <Tooltip title="Save">
+                                                <SaveIcon
+                                                    sx={{ cursor: "pointer" }}
+                                                    onClick={handleChangeToDoName.bind(
+                                                        null,
+                                                        item.id
+                                                    )}
+                                                />
+                                            </Tooltip>
+                                            <Tooltip title="Cancel">
+                                                <CancelIcon
+                                                    sx={{ cursor: "pointer" }}
+                                                    onClick={handleEditToDo.bind(
+                                                        null,
+                                                        item.id
+                                                    )}
+                                                />
+                                            </Tooltip>
+                                        </>
+                                    ) : (
+                                        <Tooltip title="Edit">
+                                            <EditIcon
                                                 sx={{ cursor: "pointer" }}
                                                 onClick={handleEditToDo.bind(
                                                     null,
                                                     item.id
                                                 )}
                                             />
-                                        </>
-                                    ) : (
-                                        <EditIcon
+                                        </Tooltip>
+                                    )}
+                                    <Tooltip title="Delete">
+                                        <DeleteIcon
                                             sx={{ cursor: "pointer" }}
-                                            onClick={handleEditToDo.bind(
+                                            onClick={handleRemoveToDo.bind(
                                                 null,
                                                 item.id
                                             )}
                                         />
-                                    )}
-
-                                    <DeleteIcon
-                                        sx={{ cursor: "pointer" }}
-                                        onClick={handleRemoveToDo.bind(
-                                            null,
-                                            item.id
-                                        )}
-                                    />
+                                    </Tooltip>
                                 </Stack>
                             </Stack>
                         );

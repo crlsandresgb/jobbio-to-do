@@ -24,6 +24,11 @@ const userDBSlice = createSlice({
                 toDoList: [],
             });
         },
+        updateUserToDoList: (state, action) => {
+            const { userId, toDoList } = action.payload;
+            const userIndex = state.findIndex((user) => user.id === userId);
+            state[userIndex].toDoList = toDoList;
+        },
     },
 });
 
