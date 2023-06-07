@@ -1,5 +1,5 @@
-import { Box, Button, Stack } from "@mui/material";
-import React from "react";
+import { Alert, Box, Button, Stack } from "@mui/material";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../store/auth/auth.slice";
 import { removeAllLists } from "../../store/todo/todo.slice";
@@ -10,6 +10,7 @@ const Header = ({ openSignUp, openSignIn }) => {
     const userId = useSelector((state) => state.auth.id);
     const todoLists = useSelector((state) => state.todo);
     const dispatch = useDispatch();
+    const [showAlert, setShowAlert] = useState(false);
     // Handle Log Out
     const handleLogOut = () => {
         dispatch(logOut());
@@ -23,6 +24,7 @@ const Header = ({ openSignUp, openSignIn }) => {
                 toDoList: todoLists,
             })
         );
+        setShowAlert(true);
     };
     return (
         <Box m={3}>
@@ -47,6 +49,17 @@ const Header = ({ openSignUp, openSignIn }) => {
                     </>
                 )}
             </Stack>
+            {showAlert && (
+                <Box m={2}>
+                    <Alert
+                        onClose={() => {
+                            setShowAlert(false);
+                        }}
+                    >
+                        Saved
+                    </Alert>
+                </Box>
+            )}
         </Box>
     );
 };
