@@ -1,4 +1,4 @@
-# jobbio-to-do
+# simple-to-do
 
 This is a simple app for a to do list
 
